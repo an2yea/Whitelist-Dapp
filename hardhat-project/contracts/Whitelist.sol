@@ -12,12 +12,13 @@ contract Whitelist {
 
     constructor (uint8 _maxWhitelistedAddresses){
         maxWhitelistedAddresses = _maxWhitelistedAddresses;
+        numAddressesWhitelisted = 0;
     } 
 
     function addAddressToWhiteList() public {
         
         require(!whitelistedAddresses[msg.sender], "The sender is already a part of the whitelist");
-       // require(numAddressesWhitelisted > maxWhitelistedAddresses, "Limit to Whitelisted Addresses reached, please come back later");
+        require(numAddressesWhitelisted != maxWhitelistedAddresses, "Limit to Whitelisted Addresses reached, please come back later");
 
         whitelistedAddresses[msg.sender] = true;
         numAddressesWhitelisted += 1;
